@@ -23,6 +23,12 @@ self: super: with self; {
 
   setuptools = callPackage ../development/python-modules/setuptools { };
 
+  broadcaster = callPackage ../development/python-modules/broadcaster {};
+  opal-common = callPackage ../development/python-modules/opal-common {};
+  envier = callPackage ../development/python-modules/envier {};
+  ddtrace = callPackage ../development/python-modules/ddtrace {};
+  fastapi-websocket-rpc = callPackage ../development/python-modules/fastapi-websocket-rpc {};
+  fastapi-websocket-pubsub = callPackage ../development/python-modules/fastapi-websocket-pubsub {};
   a2wsgi = callPackage ../development/python-modules/a2wsgi { };
 
   aafigure = callPackage ../development/python-modules/aafigure { };
@@ -102,7 +108,7 @@ self: super: with self; {
   aeppl = callPackage ../development/python-modules/aeppl { };
 
   aerosandbox = callPackage ../development/python-modules/aerosandbox { };
-
+  
   aesara = callPackage ../development/python-modules/aesara { };
 
   aesedb = callPackage ../development/python-modules/aesedb { };
