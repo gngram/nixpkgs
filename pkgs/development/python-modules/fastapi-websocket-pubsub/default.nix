@@ -6,7 +6,7 @@
   fetchPypi,
 fastapi-websocket-rpc,
 packaging,
-redis,postgresql,kafka-python-ng,
+broadcaster,
 pydantic,
 websockets,
 
@@ -29,14 +29,12 @@ buildPythonPackage rec {
   build-system = [ setuptools];
   postPatch = ''
     substituteInPlace setup.py \
-      --replace "install_requires=get_requirements()," "install_requires=['fastapi-websocket-rpc', 'packaging', 'pydantic', 'websockets', 'redis', 'postgresql', 'kafka-python-ng'],"
+      --replace "install_requires=get_requirements()," "install_requires=['fastapi-websocket-rpc', 'packaging', 'pydantic', 'websockets', 'broadcaster'],"
   '';
   propagatedBuildInputs = [ 
+broadcaster
 fastapi-websocket-rpc
 packaging
-redis
-postgresql
-kafka-python-ng
 pydantic
 websockets
     

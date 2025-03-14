@@ -23,6 +23,8 @@ self: super: with self; {
 
   setuptools = callPackage ../development/python-modules/setuptools { };
 
+  broadcaster = callPackage ../development/python-modules/broadcaster {};
+  opal-common = callPackage ../development/python-modules/opal-common {};
   fastapi-websocket-rpc = callPackage ../development/python-modules/fastapi-websocket-rpc {};
   fastapi-websocket-pubsub = callPackage ../development/python-modules/fastapi-websocket-pubsub {};
   a2wsgi = callPackage ../development/python-modules/a2wsgi { };
