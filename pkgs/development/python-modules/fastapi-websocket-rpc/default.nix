@@ -3,34 +3,41 @@
   buildPythonPackage,
   fetchFromGitHub,
   setuptools,
-fastapii,
+  pythonOlder,
+  fetchPypi,
+fastapi,
 packaging,
 pydantic,
 websockets,
-tenacity
+tenacity,
+pytest,
+pytest-asyncio,
+uvicorn,
+wheel,
+hatchling,
 }:
 
 buildPythonPackage rec {
   pname = "fastapi_websocket_rpc";
-  version = "0.1.29";
-  pyproject = true;
+  version = "0.1.28";
 
   disabled = pythonOlder "3.7";
 
-  src = fetchFromGitHub {
-    owner = "permitio";
-    repo = "fastapi_websocket_";
-    tag = version;
-    hash = "";
+  src = fetchPypi {
+    inherit pname version;
+    hash = "sha256-YiWfxR2xMCdBDGGgJZGKYYzRqO8c8pTq3eYu9IeA0Ek=";
   };
 
-  build-system = [ setuptools ];
-
+  build-system = [ setuptools wheel hatchling ];
+postPatch = ''
+    substituteInPlace setup.py \
+      --replace "install_requires=get_requirements()," "install_requires=['fastapi', 'packaging', 'pydantic', 'websockets', 'tenacity'],"
+  '';
   propagatedBuildInputs = [ 
-fastapii,
-packaging,
-pydantic,
-websockets,
+fastapi
+packaging
+pydantic
+websockets
 tenacity
   ];
 
@@ -40,7 +47,7 @@ pytest-asyncio
 uvicorn
   ];
 
-  pythonImportsCheck = [ "fastapi_websocket_pubsub" ];
+  pythonImportsCheck = [ "fastapi_websocket_rpc" ];
 
   disabledTests = [
     # Tests (SystemError) fails randomly during nixpkgs-review
