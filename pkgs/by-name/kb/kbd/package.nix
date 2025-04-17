@@ -18,11 +18,11 @@
 
 stdenv.mkDerivation rec {
   pname = "kbd";
-  version = "2.7.1";
+  version = "2.6.4";
 
   src = fetchurl {
     url = "mirror://kernel/linux/utils/kbd/${pname}-${version}.tar.xz";
-    sha256 = "sha256-8WfYmdkrVszxL29JNVFz+ThwqV8V2K7r9f3NKKYhrKg=";
+    sha256 = "sha256-UZ+NCHrsyn4KM80IS++SwGbrGXMWZmU9zHDJ1xqkCSY=";
   };
 
   # vlock is moved into its own output, since it depends on pam. This
@@ -38,11 +38,11 @@ stdenv.mkDerivation rec {
       "--enable-optional-progs"
       "--enable-libkeymap"
       "--disable-nls"
-    ]
-    ++ lib.optionals (!lib.systems.equals stdenv.buildPlatform stdenv.hostPlatform) [
-      "ac_cv_func_malloc_0_nonnull=yes"
-      "ac_cv_func_realloc_0_nonnull=yes"
     ];
+    #++ lib.optionals (!lib.systems.equals stdenv.buildPlatform stdenv.hostPlatform) [
+    #  "ac_cv_func_malloc_0_nonnull=yes"
+    #  "ac_cv_func_realloc_0_nonnull=yes"
+    #];
 
   patches = [
     ./search-paths.patch
